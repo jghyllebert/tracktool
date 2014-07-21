@@ -1,0 +1,14 @@
+<table class="table">
+        <tr>
+            <th>Contract number</th>
+            {% if show_client %}<th>Client</th>{% endif %}
+            <th>Current state</th>
+        </tr>
+    {% for contract in contracts %}
+        <tr>
+            <td><a href="{{ contract.get_absolute_url }}">{{ contract.contract_number }}</a></td>
+            {% if show_client %}<td><a href="{{ contract.client.get_absolute_url }}">{{ contract.client.name }}</a></td>{% endif %}
+            <td><span class="label label-default">{{ contract.project_set.first.current_state }}</span></td>
+        </tr>
+    {% endfor %}
+</table>

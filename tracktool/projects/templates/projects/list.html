@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+            <h1>Projects</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+            <h5>Show</h5>
+                <ul class="nav nav-pills">
+                    <li {% if not state_name %}class="active"{% endif %}><a {% if request.user.is_superuser %}href="{% url "project_list" %}"{% endif %}>Actives <span class="badge">{{ all_that_are_not_finished }}</span></a></li>
+                    {% for state in states %}
+                    <li{% if state_name == state.current_state %} class="active"{% endif %}><a {% if state.current_state in groups %}href="{% url "project_list_state" state.current_state %}"{% endif %}>{{ state.current_state }} <span class="badge">{{ state.id__count }}</span> </a></li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+            <h3>Active projects</h3>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"></div>
+
+                <table class="table">
+                    <tr>
+                        <th>Project</th>
+                        <th>State</th>
+                    </tr>
+                    {% for project in projects %}
+                        <tr>
+                            <td>[{{ project.product.name }}] {{ project.contract.client.name }}</td>
+                            <td><p><span class="label label-default">{{ project.current_state }}</span></p></td>
+                            <td>{{ project.contract.shoot_city }} ({{ project.contract.client.country.name }})</td>
+                            <td>{{ project.contract.total_cost }}</td>
+                            <td>{% if project.current_state == "sales" %}
+                                <a href="{% url "photoshoot_create" project.contract.slug %}">Create appointment</a>
+                                {% elif project.current_state == "photographer" %}
+                                {% include "photoshoots/list_action_snippet.html" with shoot=project.contract.get_active_photoshoot %}
+                                {% elif project.current_state == "production" %}
+                                <a href="{% url "project_update_flow" project.pk %}">Update project</a>
+                                {% elif project.current_state == "invoicing" %}
+                                <a href="{% url "contract_payment" project.contract.slug %}">Insert payment</a>
+                            {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

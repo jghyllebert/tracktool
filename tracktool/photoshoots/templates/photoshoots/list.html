@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <h1>Photoshoots</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Photographer</th>
+                        <th></th>
+                    </tr>
+                    {% for shoot in shoots %}
+                        <tr>
+                            <td>{{ shoot.start_date_time|date:"D, d M Y H:i:s" }}</td>
+                            <td>{{ shoot.photographer }}</td>
+                            <td>{% include "photoshoots/list_action_snippet.html" with shoot=shoot %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

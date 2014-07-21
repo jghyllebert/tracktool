@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% if title == "Sales" %}
+                        <a class="btn btn-success btn-sm" href="{% url "user_create_sales" %}">Add Salesperson</a>
+                    {% endif %}
+                </div>
+                <table class="table">
+                    {% for usr in users %}
+                        <tr>
+                            <td><a href="{{ usr.get_absolute_url }}">{{ usr.get_full_name }}</a></td>
+                            <td>{% for group in usr.groups.all %}<label class="label label-{{ group.name }}">
+                                {{ group.name }}</label>{% endfor %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

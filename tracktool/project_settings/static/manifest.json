@@ -1,0 +1,21 @@
+{
+  "name": "Nuntra Tracktool",
+  "description": "Track your sales",
+  "manifest_version": 2,
+  "version": "1",
+  "app": {
+    "urls": [
+      "*://track.nuntra.com/"
+    ],
+    "launch": {
+      "web_url": "http://track.nuntra.com"
+    }
+  },
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications"
+  ]
+}

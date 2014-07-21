@@ -1,0 +1,45 @@
+{% load sekizai_tags tz staticfiles %}
+{% addtoblock "css" %}
+        <link href="{% static "jquery.icalendar.package-1.1.1/jquery.icalendar.css" %}" rel="stylesheet">
+    {% endaddtoblock %}
+
+    {% addtoblock "js_body" %}
+        <script src="{% static "jquery.icalendar.package-1.1.1/jquery.icalendar.js" %}"></script>
+    {% endaddtoblock %}
+{% if shoot.due_date_passed %}
+    <a href="{% url "photoshoot_done" shoot.contract.slug shoot.pk %}">Upload images</a>
+{% else %}
+    <div id="id_{{ shoot.contract.slug }}"></div>
+
+    {% addtoblock "js_body" %}
+
+        {% timezone None %}
+            <script>
+                $("#id_{{ shoot.contract.slug }}").icalendar({
+                    sites: ['google'],
+                    icons: '{% static "jquery.icalendar.package-1.1.1/icalendar.png" %}',
+                    start: new Date("{{ shoot.start_date_time|date:"D, d M Y H:i:s" }}"),
+                    end: new Date("{{ shoot.end_date_time|date:"D, d M Y H:i:s" }}"),
+                    title: "{{ shoot.contract.client.name }}",
+                    description: "{{ shoot.description|escapejs }}",
+                    location: "{{ shoot.contract.shoot_address }}, {{ shoot.contract.shoot_zip_code }} {{ shoot.contract.shoot_city }}"
+                });
+            </script>
+        {% endtimezone %}
+        {% comment %}
+                                    {% timezone shoot.contract.client.country.timezone %}
+                                    <script>
+                                        $("#id_{{ shoot.contract.slug }}").icalendar({
+                                            //sites: ['Google'],
+                                            start: new Date("{{ shoot.start_date_time.isoformat }}"),
+                                            end: new Date("{{ shoot.end_date_time.isoformat }}"),
+                                            title: "{{ shoot.contract.client.name }}",
+                                            description: "{{ shoot.description|escapejs }}",
+                                            location: "{{ shoot.contract.shoot_address }}, {{ shoot.contract.shoot_zip_code }} {{ shoot.contract.shoot_city }}"
+                                        });
+                                    </script>
+                                    {% endtimezone %}
+                                    {% endcomment %}
+
+    {% endaddtoblock %}
+{% endif %}

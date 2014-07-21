@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load sekizai_tags staticfiles %}
+
+{% block content %}
+    <form action="" class="form-horizontal" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-sx-12 col-xxs-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="checkbox" name="existing_client" id="existing_client"> Use existing client?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="new_client" class="row">
+            <div class="col-lg-6 col-sm-12 col-md-12 col-sx-12 col-xxs-12">
+                <fieldset>
+                    <legend>Client details</legend>
+                    {% include "form_snippet.html" with form=new_client_form %}
+                </fieldset>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-md-12 col-sx-12 col-xxs-12">
+                <fieldset>
+                    <legend>Contactperson</legend>
+                    {% include "form_snippet.html" with form=client_contact_form %}
+                </fieldset>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Invoice information</legend>
+            {% include "form_snippet.html" with form=form %}
+        </fieldset>
+        <fieldset>
+            {{ contractproject_form.management_form }}
+            <legend>The products</legend>
+            {% for sub_form in contractproject_form %}
+                {% include "form_snippet.html" with form=sub_form %}
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Create"/>
+    </form>
+
+    {% addtoblock "js_body" %}
+         <script>
+            //get options in product model
+            var $products = $("select[id$='-product']");
+            $products.each(function () {
+                $(this).closest('.form-group').after('<div>');
+            });
+            $products.change(function () {
+                var val = $(this).val();
+                var $form_group_after = $(this).closest('.form-group').next();
+                $form_group_after.load('/products/api/get_options/' + val + '/');
+            })
+        </script>
+
+        <script>
+            $('#id_client').parents('div.form-group').hide();
+            if ($('#existing_client').is(':checked')) {
+                $('#new_client').hide();
+                $('#id_client').parents('div.form-group').show();
+            }
+
+            $('#existing_client').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#new_client').hide();
+                    $('#id_client').parents('div.form-group').show();
+                } else {
+                    $('#new_client').show();
+                    $('#id_client').parents('div.form-group').hide();
+                }
+            })
+        </script>
+
+    {% endaddtoblock %}
+{% endblock content %}

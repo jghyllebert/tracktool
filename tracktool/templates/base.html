@@ -1,0 +1,286 @@
+{% load staticfiles sekizai_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product tracker - Agoravia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="D2ofEtJ-bDOMs7ipYp-PjQkVSPjkowhnz-yAddCBbdk" />
+    <link rel="shortcut icon" href="http://nuntra.com/favicon.ico">
+    <link href="{% static "dashboard/css/bootstrap.min.css" %}" rel="stylesheet"/>
+    <link href="{% static "dashboard/css/dashboard.css" %}" rel="stylesheet"/>
+    <link href="{% static "dashboard/css/font-awesome.min.css" %}" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    {% render_block "css" %}
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="row">
+<!-- START SIDEBAR -->
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="profile">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <!--<img src="{% static "dashboard/img/profilre_icon.gif" %}" class="img-circle img-responsive">-->
+                <img src="http://nuntra.com/logo.png" class="img-responsive">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <span>{{ request.user }}</span>
+                        <!--<span class="actions">
+                            <i class="fa fa-bell"></i><span class="label label-danger">99+</span>
+                        </span>-->
+            </div>
+
+        </div>
+    </div>
+    <ul class="nav nav-sidebar">
+        <!--<li><a href=""><i class="fa fa-home"></i><span>Home</span></a></li>-->
+        <!--<li><a href=""><i class="fa fa-file"></i><span>Overview</span></a></li>-->
+        {% if perms.photoshoots.change_photoshootappointment %}
+        <li><a href="{% url "photoshoot_list" %}"><i class="fa fa-calendar"></i><span>Planned photoshoots</span></a></li>
+        {% endif %}
+        {% if perms.clients.change_client %}
+        <li><a href="{% url "client_list" %}"><i class="fa fa-building-o"></i><span>Clients</span></a></li>
+        {% endif %}
+        {% if perms.contracts.change_contract %}
+        <li><a href="{% url "contract_list" %}"><i class="fa fa-file"></i><span>Contracts</span></a></li>
+        {% endif %}
+        {% if perms.projects.change_project %}
+        <li><a href="{% url "project_list" %}"><i class="fa fa-tasks"></i><span>Projects</span></a></li>
+        {% endif %}
+        {% if perms.users.change_trackuser %}
+        <li><a href="{% url "user_list_sales" %}"><i class="fa fa-users"></i><span>Users</span></a></li>
+        {% endif %}
+    </ul>
+
+    <ul class="nav nav-manage">
+        <li><a href="{% url "admin:index" %}"><i class="fa fa-wrench"></i></a></li>
+        <li><a href="{% url "user_logout" %}"><i class="fa fa-power-off"></i></a></li>
+    </ul>
+</div>
+<!-- END SIDEBAR -->
+
+<!-- START CONTENT -->
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    {% if messages %}
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+{% endif %}
+
+    {% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="dashboard_stat green">
+                <div class="sale_icon visual">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                <div class="overview">
+                    <span class="amount">$20.000</span>
+                    <span class="title">sales</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="dashboard_stat blue">
+                <div class="sale_icon visual">
+                    <i class="fa fa-camera-retro"></i>
+                </div>
+                <div class="overview">
+                    <span class="amount">$20.000</span>
+                    <span class="title">Photoshoots</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="dashboard_stat yellow">
+                <div class="sale_icon visual">
+                    <i class="fa fa-gears"></i>
+                </div>
+                <div class="overview">
+                    <span class="amount">$20.000</span>
+                    <span class="title">In production</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="dashboard_stat red">
+                <div class="sale_icon visual">
+                    <i class="fa fa-money"></i>
+                </div>
+                <div class="overview">
+                    <span class="amount">$10.000</span>
+                    <span class="title">Billed</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Latest actions</div>
+
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-money"></i> <span>Invoice sent to Nokia</span>
+                    </li>
+                    <li class="list-group-item"><i class="fa fa-gears"></i> <span>Eder finished Nokia</span>
+                    </li>
+                    <li class="list-group-item"><i class="fa fa-dollar"></i>
+                        <span>$14.370 package for ServiPartes</span>
+                    </li>
+                    <li class="list-group-item"><i class="fa fa-camera-retro"></i>
+                        <span>new photoshoot planned</span></li>
+                    <li class="list-group-item"><i class="fa fa-camera-retro"></i>
+                        <span>new photoshoot planned</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><i class="fa fa-signal"></i> Sales
+                    <ul class="pull-right">
+                        <li>Last:</li>
+                        <li>
+                            <button class="btn btn-default btn-xs active">30 days</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-default btn-xs">60 days</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-default btn-xs">90 days</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- TODO: add graph-->
+                <div class="panel-body">
+                    ...
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-6 col-xs-6 col-xxs-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><i class="fa fa-clock-o"></i> Project completion</div>
+
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-9 col-lg-9">
+                                <h4>[345] Random client</h4>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <a href="" class="btn btn-default btn-sm pull-right">See project</a>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 100%;">
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-9 col-lg-9">
+                                <h4>[345] Random client</h4>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <a href="" class="btn btn-default btn-sm pull-right">See project</a>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 90%;">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                        <p class="alert alert-warning"><i class="fa fa-warning"></i> Waiting for Google approval</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-9 col-lg-9">
+                                <h4>[345] Random client</h4>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <a href="" class="btn btn-default btn-sm pull-right">See project</a>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 60%;">
+                                <span>60%</span>
+                            </div>
+                        </div>
+                        <p class="alert alert-danger"><i class="fa fa-warning"></i> Google disapproved upload</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-9 col-lg-9">
+                                <h4>[345] Random client</h4>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <a href="" class="btn btn-default btn-sm pull-right">See project</a>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 60%;">
+                                <span>60%</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-9 col-lg-9">
+                                <h4>[345] Random client</h4>
+                            </div>
+                            <div class="col-sm-3 col-lg-3">
+                                <a href="" class="btn btn-default btn-sm pull-right">See project</a>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 10%;">
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</div>
+<!-- END CONTENT -->
+</div>
+</div>
+<!-- END CONTAINER -->
+
+<!-- <script src="{% static "dashboard/js/jquery.min.js" %}"></script> -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="{% static "dashboard/js/bootstrap.min.js" %}"></script>
+{% render_block "js_body" %}
+</body>
+</html>

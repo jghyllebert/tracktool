@@ -1,0 +1,227 @@
+/*
+ * Base structure
+ */
+
+body, .main {
+    background-color: #f2f4f8
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #495B6C;
+        color: #ffffff;
+    }
+}
+
+.profile {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile .actions {
+    display: block;
+    margin-top: 5px;
+}
+
+.profile .actions .label {
+    font-size: 9px;
+    position: relative;
+    left: -5px;
+    top: -10px;
+}
+
+.profile .actions i {
+    font-size: 1em;
+}
+
+.sidebar h4 {
+    font-size: 0.7em;
+    color: #BECFE0;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-bottom: 20px;
+    border-top: 1px solid #415160;
+}
+
+.nav-sidebar > li {
+    border-top: 1px solid #506274;
+    border-bottom: 1px solid #415160;
+}
+
+.nav-sidebar > li > a {
+    padding-left: 5px;
+}
+
+.nav-sidebar > li > a,
+.nav-manage > li > a {
+    color: #BECFE0;
+}
+
+.nav-sidebar > li > a:hover,
+.nav-manage > li > a:hover {
+    background-color: #415160;
+}
+
+.nav-sidebar > li span {
+    margin-left: 10px;
+}
+
+.nav-sidebar > .active > a {
+    color: #fff;
+    background-color: #428bca;
+}
+
+/* sidebar manage */
+.nav-manage {
+    position: fixed;
+    bottom: 0;
+    border-left: 1px solid #415160;
+}
+
+.nav-manage li {
+    float: left;
+    border-left: 1px solid #506274;
+    border-right: 1px solid #415160;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+.dashboard_stat {
+    border: 1px solid;
+    background-color: #fff;
+    height: 50px;
+    margin-bottom: 25px;
+}
+
+.dashboard_stat .title {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #c0cadd;
+    display: block;
+}
+
+.dashboard_stat .visual {
+    height: 100%;
+    width: 75px;
+    float: left;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 2em;
+    margin-right: 5px;
+}
+
+.visual i {
+    color: #fff;
+    margin: 0 auto;
+}
+
+.dashboard_stat .overview {
+    padding-top: 5px;
+}
+
+.dashboard_stat.green {
+    border-color: #3c763d;
+}
+
+.dashboard_stat.green .visual, .label-sales {
+    background-color: #3c763d;
+}
+
+.dashboard_stat.blue {
+    border-color: #285e8e;
+}
+
+.dashboard_stat.blue .visual {
+    background-color: #285e8e;
+}
+
+.dashboard_stat.yellow {
+    border-color: #d58512;
+}
+
+.dashboard_stat.yellow .visual {
+    background-color: #d58512;
+}
+
+.dashboard_stat.red {
+    border-color: #843534;
+}
+
+.dashboard_stat.red .visual {
+    background-color: #843534;
+}
+
+/*
+ * Panels
+ */
+.panel .pull-right li {
+    float: left;
+    list-style: none;
+    padding-left: 5px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.panel {
+    border-radius: 0;
+}
+
+.panel span {
+    margin-left: 10px;
+}
+
+/*
+ * Login form
+ */
+.login_form {
+    margin: 5% auto;
+    width: 40%;
+}

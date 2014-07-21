@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Tracktool login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="D2ofEtJ-bDOMs7ipYp-PjQkVSPjkowhnz-yAddCBbdk" />
+
+    <link href="{% static "dashboard/css/bootstrap.min.css" %}" rel="stylesheet"/>
+    <link href="{% static "dashboard/css/dashboard.css" %}" rel="stylesheet"/>
+    <link href="{% static "dashboard/css/font-awesome.min.css" %}" rel="stylesheet"/>
+</head>
+<body>
+<div class="login_form">
+    <img src="http://nuntra.com/logo.png">
+    <form class="form-horizontal" method="post" action="" role="form">{% csrf_token %}
+        {% include "form_snippet.html" with form=form %}
+        {% comment %}
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-10">
+                <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+            </div>
+        </div>
+        {% endcomment %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

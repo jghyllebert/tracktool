@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <h1>{{ project.contract.contract_number }} ({{ project.contract.client.name }})</h1>
+            <ul>
+                <li>Edit</li>
+                <li><a href="{% url "project_state" project.pk %}">Change state</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <h2>States</h2>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>State</th>
+                        <th>Date</th>
+                    </tr>
+                    {% for state in project.states.all %}
+                        <tr>
+                            <td>{{ state }}</td>
+                            <td>{{ state.datestamp }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

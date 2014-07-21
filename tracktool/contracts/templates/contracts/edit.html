@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <h1>Edit Contract</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-sx-12 col-xxs-12">
+            <form class="form-horizontal" method="post">{% csrf_token %}
+                {% include "form_snippet.html" with form=form %}
+                <button class="btn">Update</button> or <a href="{{ form.instance.get_absolute_url }}">Return</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

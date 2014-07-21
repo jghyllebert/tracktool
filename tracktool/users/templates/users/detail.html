@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ track_user.get_full_name }}</h1>
+    <nav>
+    <ul>
+        <li><a href="{% url "user_update" track_user.pk %}">Edit</a></li>
+        <li><a href="{% url "user_delete" track_user.pk %}">Delete</a></li>
+    </ul>
+    </nav>
+{% endblock content %}
