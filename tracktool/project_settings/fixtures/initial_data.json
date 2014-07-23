@@ -1,0 +1,33 @@
+[
+    {
+        "model": "project_settings.worldregion",
+        "pk": 1,
+        "fields": {
+            "name": "AMER"
+        }
+    },
+    {
+        "model": "project_settings.worldregion",
+        "pk": 2,
+        "fields": {
+            "name": "EMEA"
+        }
+    },
+    {
+        "model": "project_settings.worldregion",
+        "pk": 3,
+        "fields": {
+            "name": "APAC"
+        }
+    },
+    {
+        "model": "project_settings.country",
+        "pk": 1,
+        "fields": {
+            "name": "Belgium",
+            "tva_percentage": 21,
+            "world_region": 2,
+            "timezone": "Europe/Brussels"
+        }
+    }
+]

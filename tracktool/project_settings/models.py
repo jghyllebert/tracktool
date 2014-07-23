@@ -1,4 +1,5 @@
 from apiclient.discovery import build
+from django.conf import settings
 from django.db import models
 import httplib2
 from timezone_field import TimeZoneField
@@ -27,11 +28,11 @@ class Country(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.drive_folder_id:
-            file_user = TrackUser.objects.get(pk=2)
+            file_user = TrackUser.objects.get(pk=settings.USER_ID_GOOGLE_OAUTH)
             drive_service = build('drive', 'v2', http=file_user.credentials.authorize(httplib2.Http()))
             folder_body = {
                 "title": self.name,
-                "parents": [{"id": "0B-H49m3eLaNRZTNjSkcwLW12bEk"}],
+                "parents": [{"id": settings.DRIVE_PARENT_FOLDER_ID}],
                 "mimeType": "application/vnd.google-apps.folder"
             }
             folder = drive_service.files().insert(body=folder_body).execute()

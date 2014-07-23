@@ -1,9 +1,9 @@
 import httplib2
 from datetime import datetime
 from apiclient.discovery import build
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
-from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic import CreateView, DetailView
@@ -85,12 +85,16 @@ class CreateContract(LoginRequiredMixin, PermissionRequiredMixin, SendNotificati
                 product = project.product
                 options = self.request.POST.getlist(product.slug + "_option")
                 flow = product.flow.splitlines()
-                position = flow.index("-- INSERT OPTIONS --")
-                for option in options:
-                    #insert options after --INSERT OPTIONS
-                    flow.insert(position + 1, option)
-                #Remove -- INSERT OPTION --
-                flow.pop(position)
+
+                try:
+                    position = flow.index(settings.FLOW_OPTIONS_PLACEHOLDER)
+                    for option in options:
+                        #insert options after the placeholder
+                        flow.insert(position + 1, option)
+                    #Remove placeholder
+                    flow.pop(position)
+                except ValueError:
+                    pass
 
                 #Convert back to TextField
                 workflow = ""
@@ -121,7 +125,7 @@ class CreateContract(LoginRequiredMixin, PermissionRequiredMixin, SendNotificati
         """
         Create folders on Google drive
         """
-        file_user = TrackUser.objects.get(pk=2)
+        file_user = TrackUser.objects.get(pk=settings.USER_ID_GOOGLE_OAUTH)
         drive_service = build('drive', 'v2', http=file_user.credentials.authorize(httplib2.Http()))
         folder_body = {
             "title": "%(contract)d-%(client)s-%(city)s" % {

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
 
 from project_settings.models import Country
 
@@ -7,7 +8,9 @@ from project_settings.models import Country
 class Product(models.Model):
     name = models.CharField(max_length=75)
     slug = models.SlugField(blank=True)
-    flow = models.TextField()
+    flow = models.TextField(
+        help_text="To insert the options in the flow, add the placeholder: <b>%s</b>" % settings.FLOW_OPTIONS_PLACEHOLDER
+    )
     options = models.TextField(blank=True)
 
     def __unicode__(self):
