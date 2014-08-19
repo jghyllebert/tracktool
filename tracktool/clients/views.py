@@ -71,6 +71,7 @@ class EditClient(LoginRequiredMixin, UpdateView):
         :return:
         """
         if not self.request.user.is_superuser:
+            self.object = self.get_object()
             if self.object.account_manager != self.request.user:
                 raise PermissionDenied
         return super(EditClient, self).dispatch(*args, **kwargs)

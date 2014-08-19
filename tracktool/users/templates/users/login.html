@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="login_form">
-    <img src="http://nuntra.com/logo.png">
+    <img src="{% static "dashboard/img/ghyllebert_logo.png" %}">
     <form class="form-horizontal" method="post" action="" role="form">{% csrf_token %}
         {% include "form_snippet.html" with form=form %}
         {% comment %}

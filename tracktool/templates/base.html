@@ -11,6 +11,22 @@
     <link href="{% static "dashboard/css/font-awesome.min.css" %}" rel="stylesheet"/>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     {% render_block "css" %}
+
+    <script>
+		var EXAMPLE = {};
+		EXAMPLE.MODELS = {};
+		EXAMPLE.COLLECTIONS = {};
+		EXAMPLE.VIEWS = {};
+    </script>
+
+    <!-- <script src="{% static "dashboard/js/jquery.min.js" %}"></script> -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="{% static "dashboard/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}underscore/underscore.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}backbone/backbone.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}backbone/backbone-tastypie.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}backbone/models.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}backbone/app.js"></script>
 </head>
 <body>
 
@@ -20,17 +36,14 @@
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="profile">
         <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <!--<img src="{% static "dashboard/img/profilre_icon.gif" %}" class="img-circle img-responsive">-->
-                <img src="http://nuntra.com/logo.png" class="img-responsive">
+            <div class="col-sm-4 col-md-4">
+                <img src="{% static "dashboard/img/jonas.jpg" %}" class="img-circle img-responsive">
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-8 col-md-8">
                 <span>{{ request.user }}</span>
-                        <!--<span class="actions">
+                        <span class="actions">
                             <i class="fa fa-bell"></i><span class="label label-danger">99+</span>
-                        </span>-->
+                        </span>
             </div>
 
         </div>
@@ -277,10 +290,6 @@
 </div>
 </div>
 <!-- END CONTAINER -->
-
-<!-- <script src="{% static "dashboard/js/jquery.min.js" %}"></script> -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="{% static "dashboard/js/bootstrap.min.js" %}"></script>
 {% render_block "js_body" %}
 </body>
 </html>

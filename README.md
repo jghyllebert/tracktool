@@ -44,6 +44,11 @@ Sync the database using
     python tracktool/manage.py syncdb
     python tracktool/manage.py migrate
 
+Install Bower applications: (Check if you have nodejs and npm installed)
+Bug on Linux, solution found on http://syntaxsugar.github.io/posts/2014/05/how-to-install-bower-on-ubuntu-1404-lts/
+
+    python tracktool/manage.py bower install
+
 First, we will allow the application to use our Google drive. Let's start our server:
 
     python tracktool/manage.py runserver
@@ -66,8 +71,10 @@ At the moment it does just this, but it could be extended with graphs and other 
 
 Changelog
 ---------
-### 0.2
+### 0.2 (ongoing)
 
 * Workflow placeholder editable
 * Can work on any Google account
 * Fixtures for world regions and groups
+* Fixed a bug where salespeople couldn't edit their clients or contracts
+* Added Backbone.js, tastypie and bower

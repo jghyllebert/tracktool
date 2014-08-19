@@ -12,12 +12,16 @@
                 <div class="panel-heading">
                     <a class="btn btn-success btn-sm" href="{% url "client_create" %}">Add Client</a>
                 </div>
-                <ul class="list-group">
-                    {% for client in clients %}
-                        <li class="list-group-item"><a href="{{ client.get_absolute_url }}">{{ client.name }}</a></li>
-                    {% endfor %}
+                <ul class="list-group" id="my-model-list">
+
                 </ul>
             </div>
         </div>
     </div>
+
+<script>
+
+	var view = new EXAMPLE.VIEWS.ClientListView();
+	ClientCollection.fetch({ reset : true });
+</script>
 {% endblock content %}

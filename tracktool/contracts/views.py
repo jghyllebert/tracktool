@@ -174,6 +174,7 @@ class EditContract(UpdateView):
         :return:
         """
         if not self.request.user.is_superuser:
+            self.object = self.get_object()
             if self.object.client.account_manager != self.request.user:
                 raise PermissionDenied
         return super(EditContract, self).dispatch(*args, **kwargs)

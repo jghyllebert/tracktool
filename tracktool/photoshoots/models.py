@@ -7,16 +7,7 @@ from contracts.models import Contract
 
 
 ACCOUNT_CHOICES = (
-    ('johanbeselaere@gmail.com', 'johanbeselaere@gmail.com'),
-    ('bverhaegen@gmail.com', 'bverhaegen@gmail.com'),
-    ('ahoravia@gmail.com', 'ahoravia@gmail.com'),
-    ('byyoursite@gmail.com', 'byyoursite@gmail.com'),
-    ('martinuskoolen@gmail.com', 'martinuskoolen@gmail.com'),
-    ('combipano@gmail.com', 'combipano@gmail.com'),
-    ('agoraviamx@gmail.com', 'agoraviamx@gmail.com'),
-    ('aravianuvia@gmail.com', 'aravianuvia@gmail.com'),
-    ('agoravianuvia@gmail.com', 'agoravianuvia@gmail.com'),
-    ('agoraviabr@gmail.com', 'agoraviabr@gmail.com'),
+    ('test-account@gmail.com', 'test-account@gmail.com'),
 )
 
 

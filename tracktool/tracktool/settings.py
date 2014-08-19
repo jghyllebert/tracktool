@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from django.conf import global_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -55,6 +55,8 @@ INSTALLED_APPS = (
     'sekizai',
     'south',
     'timezone_field',
+    'tastypie',
+    'djangobower',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,6 +120,10 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 
+STATICFILES_FINDERS = global_settings.STATICFILES_FINDERS + (
+    'djangobower.finders.BowerFinder',
+)
+
 LOGIN_URL = 'user_login'
 LOGOUT_URL = 'user_logout'
 
@@ -140,3 +146,16 @@ USER_ID_GOOGLE_OAUTH = 1
 #Product flow placeholder
 #If a product has options, they will be added where the placeholder is in the flow
 FLOW_OPTIONS_PLACEHOLDER = "-- INSERT OPTIONS --"
+
+
+### Bower settings ###
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, "bower_components")
+
+# run ./manage.py bower install
+# https://github.com/thedrow/django-bower
+BOWER_INSTALLED_APPS = (
+    'underscore',
+    'backbone',
+    'datetimepicker',
+)
