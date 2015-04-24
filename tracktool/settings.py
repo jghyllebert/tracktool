@@ -79,7 +79,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 ROOT_URLCONF = 'tracktool.urls'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 WSGI_APPLICATION = 'tracktool.wsgi.application'
 
 
