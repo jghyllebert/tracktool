@@ -131,7 +131,7 @@ OAUTH_SCOPE = [
 ]
 
 REDIRECT_URL = "http://127.0.0.1:8000/get_my_stuff/"
-DRIVE_PARENT_FOLDER_ID = os.environ['DRIVE_PARENT_FOLDER']
+DRIVE_PARENT_FOLDER_ID = os.environ.get('DRIVE_PARENT_FOLDER')
 
 # The user that is connected to Google, most of the time this will be the
 # superuser you created when performing syncdb the first time.
