@@ -121,8 +121,8 @@ TEMPLATE_DIRS = (
 LOGIN_URL = 'user_login'
 LOGOUT_URL = 'user_logout'
 
-GOOGLE_CLIENT = os.environ['GOOGLE_CLIENT']
-GOOGLE_SECRET = os.environ['GOOGLE_SECRET']
+GOOGLE_CLIENT = os.environ.get('GOOGLE_CLIENT')
+GOOGLE_SECRET = os.environ.get('GOOGLE_SECRET')
 OAUTH_SCOPE = [
     'https://www.googleapis.com/auth/drive.file',
     'https://www.googleapis.com/auth/userinfo.email',
