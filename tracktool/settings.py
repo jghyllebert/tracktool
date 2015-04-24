@@ -89,8 +89,8 @@ WSGI_APPLICATION = 'tracktool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jghyllebert',
-        'USER': 'jghyllebert',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
         'PASSWORD': os.environ['DATABASE_PASSWORD'],
     }
 }
@@ -133,10 +133,12 @@ OAUTH_SCOPE = [
 REDIRECT_URL = "http://127.0.0.1:8000/get_my_stuff/"
 DRIVE_PARENT_FOLDER_ID = os.environ['DRIVE_PARENT_FOLDER']
 
-#The user that is connected to Google, most of the time this will be the superuser you created when performing syncdb
-#the first time. Change if otherwise
+# The user that is connected to Google, most of the time this will be the
+# superuser you created when performing syncdb the first time.
+# Change if otherwise
 USER_ID_GOOGLE_OAUTH = 1
 
-#Product flow placeholder
-#If a product has options, they will be added where the placeholder is in the flow
+# Product flow placeholder
+# If a product has options,
+# they will be added where the placeholder is in the flow
 FLOW_OPTIONS_PLACEHOLDER = "-- INSERT OPTIONS --"
